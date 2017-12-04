@@ -1,13 +1,9 @@
 <?php
 
-die(var_dump("tests"));
+phpinfo();
+die;
 
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/2/17
- * Time: 12:22 AM
- */
+
 require (dirname(__FILE__)) . '/autoload.php';
 
 $config = require (dirname(__FILE__)) . '/config.php';
