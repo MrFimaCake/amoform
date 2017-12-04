@@ -1,4 +1,7 @@
 <?php
+
+die(var_dump("tests"));
+
 /**
  * Created by PhpStorm.
  * User: mrcake
