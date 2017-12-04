@@ -1,13 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/4/17
- * Time: 1:24 AM
- */
 
 namespace amocrm;
 
+/**
+ * Call it to validate form
+ *
+ * Class RequestValidator
+ * @package amocrm
+ */
 class RequestValidator
 {
     protected $data = [];
@@ -20,6 +20,11 @@ class RequestValidator
         $this->data = $requestArgs;
     }
 
+    /**
+     * Dynamically sets the validation rules
+     *
+     * @param array $rules
+     */
     public function setRules(array $rules)
     {
         $this->rules = $rules;

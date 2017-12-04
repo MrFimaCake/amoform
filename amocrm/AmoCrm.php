@@ -1,13 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/2/17
- * Time: 12:24 AM
- */
 
 namespace amocrm;
 
+/**
+ * Main module class
+ *
+ * Class AmoCrm
+ * @package amocrm
+ */
 class AmoCrm
 {
     const NEW_DEAL_NAME = 'Заявка с сайта';

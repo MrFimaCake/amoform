@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/4/17
- * Time: 12:38 AM
- */
 
 namespace amocrm;
 
-
+/**
+ * Interface AmoCrmClientInterface
+ * @package amocrm
+ */
 interface AmoCrmClientInterface
 {
     public function getContacts(string $queryFilters = "");

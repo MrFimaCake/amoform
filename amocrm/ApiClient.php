@@ -1,15 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/3/17
- * Time: 6:23 PM
- */
 
 namespace amocrm;
 
 use stdClass;
 
+/**
+ * cUrl client for using amoCrm api
+ *
+ * Class ApiClient
+ * @package amocrm
+ */
 class ApiClient implements AmoCrmClientInterface
 {
     const CUSTOM_FIELD_EMAIL_ENUM_DEFAULT = 'WORK';
@@ -42,6 +42,14 @@ class ApiClient implements AmoCrmClientInterface
         ];
     }
 
+
+    /**
+     * Cause error is in different structure every time we need check manually error in this every time
+     *
+     * @param stdClass $response
+     * @return stdClass
+     * @throws AmoCrmException
+     */
     public function checkError(stdClass $response)
     {
         if (isset($response->error)) {
@@ -101,6 +109,8 @@ class ApiClient implements AmoCrmClientInterface
     }
 
     /**
+     * Set/check cookies
+     *
      * @return stdClass
      * @throws AmoCrmException
      */

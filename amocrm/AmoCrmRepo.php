@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/4/17
- * Time: 2:22 PM
- */
 
 namespace amocrm;
 
-
+/**
+ * Class AmoCrmRepo
+ * @package amocrm
+ */
 class AmoCrmRepo
 {
     private $client;
@@ -36,6 +33,8 @@ class AmoCrmRepo
 
 
     /**
+     * Use lead data to create task
+     *
      * @param $dealId
      * @return mixed
      */
@@ -56,6 +55,8 @@ class AmoCrmRepo
     }
 
     /**
+     * Find contact by email and by phone
+     *
      * @param $email
      * @param $phone
      * @return array|null
@@ -78,6 +79,8 @@ class AmoCrmRepo
     }
 
     /**
+     * Get info who user belongs to
+     *
      * @return object
      */
     public function accountInfo() : \stdClass
@@ -103,6 +106,8 @@ class AmoCrmRepo
     }
 
     /**
+     * According to the task we should find user who has less tasks
+     *
      * @return mixed
      */
     public function getBusylessUser()

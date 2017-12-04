@@ -1,14 +1,13 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mrcake
- * Date: 12/3/17
- * Time: 11:58 PM
- */
 
 namespace amocrm;
 
-
+/**
+ * Credentials storage
+ *
+ * Class Credentials
+ * @package amocrm
+ */
 class Credentials
 {
     const USERNAME_KEY = 'USER_LOGIN';
@@ -21,6 +20,11 @@ class Credentials
         return self::$credentials;
     }
 
+    /**
+     * Get user credentials in api auth format
+     *
+     * @return array
+     */
     public static function getUserData()
     {
         return [
