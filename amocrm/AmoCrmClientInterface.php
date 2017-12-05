@@ -18,5 +18,5 @@ interface AmoCrmClientInterface
 
     public function setDealToContact($contactId, $dealId);
 
-    public function createTask($elementId, $elementType, $taskTypeId);
+    public function createTask($elementId, $elementType, $taskTypeId, $userId);
 }

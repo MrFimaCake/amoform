@@ -235,12 +235,13 @@ class ApiClient implements AmoCrmClientInterface
      * @param  $taskTypeId
      * @return object
      */
-    public function createTask($elementId, $elementType, $taskTypeId)
+    public function createTask($elementId, $elementType, $taskTypeId, $userId)
     {
         $taskBody = [
             'element_id' => $elementId,
             'element_type' => $this->getTaskElementValue($elementType),
             'task_type' => $taskTypeId,
+            'responsible_user_id' => $userId,
             'complete_till' => '23:59'
         ];
 

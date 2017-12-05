@@ -57,7 +57,6 @@ class AmoCrm
             );
 
             if (!$contactInSystem) {
-//            if (true) {
                 $createdContact = $apiRepo->createContact($validator->getFields());
                 $contactId = $createdContact->id;
 
@@ -72,7 +71,8 @@ class AmoCrm
 
             $linked = $apiRepo->linkDealToContact($contactId, $dealResponse->id);
 
-            $task = $apiRepo->createTaskByDeal($dealResponse->id);
+            $task = $apiRepo->createTaskByDeal($dealResponse->id, $userId);
+
             $taskId = $task->tasks->add[0]->id;
 
             $requestData['success'] = sprintf(static::successMessage(), $contactId, $dealResponse->id, $taskId);

@@ -36,9 +36,10 @@ class AmoCrmRepo
      * Use lead data to create task
      *
      * @param $dealId
+     * @param $userId
      * @return mixed
      */
-    public function createTaskByDeal($dealId)
+    public function createTaskByDeal($dealId, $userId)
     {
         $currentAccount = $this->currentAccountInfo ?? $this->client->currentAccount();
         $taskTypes = $currentAccount->account->task_types;
@@ -46,7 +47,7 @@ class AmoCrmRepo
             return $typeObject->code == 'CALL';
         });
 
-        return $this->client->createTask($dealId, ApiClient::TASK_ELEMENT_TYPE_DEAL, array_shift($taskTypes)->id);
+        return $this->client->createTask($dealId, ApiClient::TASK_ELEMENT_TYPE_DEAL, array_shift($taskTypes)->id, $userId);
     }
 
     public function linkDealToContact($contactId, $dealId)
@@ -113,11 +114,10 @@ class AmoCrmRepo
     public function getBusylessUser()
     {
         $currentAccountInfo = $this->currentAccountInfo ?? $this->accountInfo();
-        array_filter($currentAccountInfo->account->users, function ($user) {
+        $users = array_filter($currentAccountInfo->account->users, function ($user) {
             return !$user->is_admin;
         });
 
-        $users = [];
         $usersToDeals = [];
         //get user with minimum deals(leads)
         foreach ($users as $user) {
@@ -135,6 +135,7 @@ class AmoCrmRepo
 
         asort($usersToDeals, SORT_NUMERIC);
         $sortedUsers = array_keys($usersToDeals);
+
         return array_shift($sortedUsers);
     }
 }
