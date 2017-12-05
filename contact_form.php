@@ -15,6 +15,7 @@
             <h1>Create contact</h1>
             <?php
             if (isset($errors)) {
+                var_dump($errors);
                 foreach ($errors as $errorList) {
                     foreach ($errorList as $error) {
                         echo '<div class="alert alert-danger" role="alert">' . $error . '</div>';
@@ -22,6 +23,7 @@
                 }
             }
             if (isset($success)) {
+                var_dump($success);
                 foreach ((array)$success as $successItem) {
                     echo '<div class="alert alert-success" role="alert">' . $successItem . '</div>';
                 }

@@ -56,8 +56,8 @@ class AmoCrm
                 $validator->getField('phone')
             );
 
-//            if (!$contactInSystem) {
-        if (true) {
+            if (!$contactInSystem) {
+//            if (true) {
                 $createdContact = $apiRepo->createContact($validator->getFields());
                 $contactId = $createdContact->id;
 
@@ -66,6 +66,7 @@ class AmoCrm
             } else {
                 [$contactId, $userId] = $contactInSystem;
             }
+
 
             $dealResponse = $apiRepo->createDeal(self::NEW_DEAL_NAME, $userId);
 
@@ -80,7 +81,8 @@ class AmoCrm
 
             $requestData['errors'] = [$e->getMessage()];
             $requestData['errors'][] = static::defaultErrorMessage();
-
+        } catch (\Throwable $e) {
+            die(var_dump($e->getMessage()));
         } finally {
             return $form->render($requestData);
         }

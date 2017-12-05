@@ -141,10 +141,14 @@ class ApiClient implements AmoCrmClientInterface
      * @return array
      * @throws AmoCrmException
      */
-    public function getContacts(string $queryFilter = "")
+    public function getContacts(string $queryFilter = "") : array
     {
         $addQueryFilter = $queryFilter ? ['query' => $queryFilter] : [];
-        $response = $this->checkError($this->safeRequest('private/api/v2/json/contacts/list', $addQueryFilter));
+        $response = $this->safeRequest('private/api/v2/json/contacts/list', $addQueryFilter);
+
+        if (is_object($response)) {
+            $this->checkError($response);
+        }
 
         return $response->contacts ?? [];
     }

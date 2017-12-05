@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ad6f2fd-3e28-4444-b3ff-a1efb94552f6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/amocrm/AmoCrm.php" afterPath="$PROJECT_DIR$/amocrm/AmoCrm.php" />
+      <change beforePath="$PROJECT_DIR$/amocrm/ApiClient.php" afterPath="$PROJECT_DIR$/amocrm/ApiClient.php" />
+      <change beforePath="$PROJECT_DIR$/contact_form.php" afterPath="$PROJECT_DIR$/contact_form.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -13,11 +16,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
               <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/contact_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -36,18 +49,8 @@
       <file leaf-file-name="AmoCrm.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/amocrm/AmoCrm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="View.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/amocrm/View.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="5" lean-forward="false" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
+            <state relative-caret-position="315">
+              <caret line="84" column="41" lean-forward="false" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -73,11 +76,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ApiClient.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ApiClient.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/amocrm/ApiClient.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+            <state relative-caret-position="555">
+              <caret line="140" column="20" lean-forward="true" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -144,9 +147,9 @@
       <find>n getContacts</find>
       <find>getContacts</find>
       <find>required</find>
-      <find>getcontacts</find>
-      <find>busyl</find>
       <find>die(var</find>
+      <find>busyl</find>
+      <find>getcontacts</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -163,17 +166,17 @@
         <option value="$PROJECT_DIR$/form.php" />
         <option value="$PROJECT_DIR$/amocrm/Form.php" />
         <option value="$PROJECT_DIR$/config.php" />
-        <option value="$PROJECT_DIR$/contact_form.php" />
-        <option value="$PROJECT_DIR$/amocrm/AmoCrm.php" />
         <option value="$PROJECT_DIR$/amocrm/View.php" />
         <option value="$PROJECT_DIR$/amocrm/RequestValidator.php" />
         <option value="$PROJECT_DIR$/amocrm/Credentials.php" />
-        <option value="$PROJECT_DIR$/amocrm/ApiClient.php" />
         <option value="$PROJECT_DIR$/amocrm/AmoCrmRepo.php" />
         <option value="$PROJECT_DIR$/amocrm/AmoCrmException.php" />
         <option value="$PROJECT_DIR$/amocrm/AmoCrmClientInterface.php" />
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/index.php" />
+        <option value="$PROJECT_DIR$/contact_form.php" />
+        <option value="$PROJECT_DIR$/amocrm/AmoCrm.php" />
+        <option value="$PROJECT_DIR$/amocrm/ApiClient.php" />
       </list>
     </option>
   </component>
@@ -255,12 +258,12 @@
       <updated>1512166908527</updated>
       <workItem from="1512166909693" duration="2675000" />
       <workItem from="1512219844689" duration="128000" />
-      <workItem from="1512295246059" duration="39184000" />
+      <workItem from="1512295246059" duration="40044000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41987000" />
+    <option name="totallyTimeSpent" value="42847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="796" extended-state="6" />
@@ -418,14 +421,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/contact_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="51" column="38" lean-forward="true" selection-start-line="51" selection-start-column="38" selection-end-line="51" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -458,14 +453,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/amocrm/ApiClient.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/amocrm/AmoCrmRepo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
@@ -490,14 +477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/amocrm/AmoCrm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="20" lean-forward="false" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -510,6 +489,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/contact_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="16" lean-forward="false" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amocrm/AmoCrm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="84" column="41" lean-forward="false" selection-start-line="84" selection-start-column="41" selection-end-line="84" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/amocrm/ApiClient.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="140" column="20" lean-forward="true" selection-start-line="140" selection-start-column="20" selection-end-line="140" selection-end-column="20" />
           <folding />
         </state>
       </provider>
