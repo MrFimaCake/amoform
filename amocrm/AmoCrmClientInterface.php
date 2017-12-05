@@ -12,6 +12,8 @@ interface AmoCrmClientInterface
 
     public function createContact(array $fields, array $contactCustomFields);
 
+    public function updateContact($contactId, array $fields, array $customFieldsAssoc);
+
     public function currentAccount();
 
     public function createDeal(array $fields);

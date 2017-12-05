@@ -57,22 +57,21 @@ class AmoCrm
             );
 
             if (!$contactInSystem) {
-                $createdContact = $apiRepo->createContact($validator->getFields());
-                $contactId = $createdContact->id;
-
                 $userId = $apiRepo->getBusylessUser();
-
+                $createdContact = $apiRepo->createContact($validator->getFields(), $userId);
+                $contactId = $createdContact->id;
+                $contactInSystem = (array)$createdContact;
             } else {
-                [$contactId, $userId] = $contactInSystem;
+                $contactId = $contactInSystem->id;
+                $userId = $contactInSystem->responsible_user_id;
+                $apiRepo->updateContact($contactId, $validator->getFields(), $contactInSystem);
             }
-
 
             $dealResponse = $apiRepo->createDeal(self::NEW_DEAL_NAME, $userId);
 
-            $linked = $apiRepo->linkDealToContact($contactId, $dealResponse->id);
+            $apiRepo->linkDealToContact((array)$contactInSystem, $dealResponse->id);
 
             $task = $apiRepo->createTaskByDeal($dealResponse->id, $userId);
-
             $taskId = $task->tasks->add[0]->id;
 
             $requestData['success'] = sprintf(static::successMessage(), $contactId, $dealResponse->id, $taskId);
@@ -81,8 +80,9 @@ class AmoCrm
 
             $requestData['errors'] = [$e->getMessage()];
             $requestData['errors'][] = static::defaultErrorMessage();
+
         } catch (\Throwable $e) {
-            die(var_dump($e->getMessage()));
+            $requestData['errors'] = ['System error'];
         } finally {
             return $form->render($requestData);
         }

@@ -53,8 +53,17 @@ class ApiClient implements AmoCrmClientInterface
     public function checkError(stdClass $response)
     {
         if (isset($response->error)) {
-            throw new AmoCrmException($response->error);
+            $error = $response->error;
+
+            if (is_array($response->error)) {
+                $error = $response->error[0];
+            }
+
+            $message = $error->message ?? $error;
+
+            throw new AmoCrmException($message);
         }
+
         return $response;
     }
 
@@ -158,6 +167,65 @@ class ApiClient implements AmoCrmClientInterface
         return $this->taskElementTypes[$type];
     }
 
+    protected function processCustomFields(array $fields, array $contactCustomFields, $update = false)
+    {
+        $customFields = [];
+
+        $customFields[] = [
+            'id' => (int)$contactCustomFields['EMAIL']->id,
+            'values' => [
+                [
+                    'value' => $fields['email'],
+                    'enum' => $update ? 'OTHER' : self::CUSTOM_FIELD_EMAIL_ENUM_DEFAULT,
+                ]
+            ],
+        ];
+
+        $customFields[] = [
+            'id' => (int)$contactCustomFields['PHONE']->id,
+            'values' => [
+                [
+                    'value' => $fields['phone'],
+                    'enum' => self::CUSTOM_FIELD_PHONE_ENUM_DEFAULT,
+                ]
+            ],
+        ];
+
+        return $customFields;
+    }
+
+
+    /**
+     * @param $contactId
+     * @param array $fields
+     * @param array $contactCustomFields
+     * @return stdClass
+     * @throws AmoCrmException
+     */
+    public function updateContact($contactId, array $fields, array $contactCustomFields)
+    {
+        $fields['id'] = $contactId;
+
+        $updateFields = $fields;
+        $updateFields['custom_fields'] = $fields['custom_fields'] ?? [];
+
+        foreach ($this->processCustomFields($fields, $contactCustomFields, true) as $customFields) {
+            $updateFields['custom_fields'][] = $customFields;
+        }
+
+        $finalFieldStructure = ['request' => ['contacts' => ['update' => [$updateFields]]]];
+
+        $postFieldsAsSetopt = [
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($finalFieldStructure)
+        ];
+
+        return $this->checkError(
+            $this->safeRequest('private/api/v2/json/contacts/set', [], $postFieldsAsSetopt)->contacts->update[0]
+        );
+    }
+
+
     /**
      * @param array $fields
      * @param array $contactCustomFields
@@ -168,28 +236,10 @@ class ApiClient implements AmoCrmClientInterface
     {
         $createFields = [];
         $createFields['name'] = $fields['name'] ?? [];
+        $createFields['responsible_user_id'] = $fields['responsible_user_id'] ?? null;
         $createFields['type'] = 'contact';
-        $createFields['custom_fields'] = [];
 
-        $createFields['custom_fields'][] = [
-            'id' => (int)$contactCustomFields['EMAIL']->id,
-            'values' => [
-                [
-                    'value' => $fields['email'],
-                    'enum' => self::CUSTOM_FIELD_EMAIL_ENUM_DEFAULT,
-                ]
-            ],
-        ];
-
-        $createFields['custom_fields'][] = [
-            'id' => (int)$contactCustomFields['PHONE']->id,
-            'values' => [
-                [
-                    'value' => $fields['phone'],
-                    'enum' => self::CUSTOM_FIELD_PHONE_ENUM_DEFAULT,
-                ]
-            ],
-        ];
+        $createFields['custom_fields'] = $this->processCustomFields($fields, $contactCustomFields);
 
         $finalFieldStructure = ['request' => ['contacts' => ['add' => [$createFields]]]];
 
@@ -204,20 +254,20 @@ class ApiClient implements AmoCrmClientInterface
     }
 
     /**
-     * @param  $contactId
+     * @param  $contact
      * @param  $dealId
      * @return mixed
      * @throws AmoCrmException
      */
-    public function setDealToContact($contactId, $dealId) {
+    public function setDealToContact($contact, $dealId)
+    {
+        if (!isset($contact['linked_leads_id'])) {
+            $contact['linked_leads_id'] = [];
+        }
+        $contact['linked_leads_id'][] = $dealId;
+        $contact['last_modified'] = time();
 
-        $updateFields = [
-            'id' => $contactId,
-            'linked_leads_id' => [$dealId],
-            'last_modified' => time()
-        ];
-
-        $postFields = ['request' => ['contacts' => ['update' => [$updateFields]]]];
+        $postFields = ['request' => ['contacts' => ['update' => [$contact]]]];
 
         $linked =  $this->safeRequest('private/api/v2/json/contacts/set', [], [
             CURLOPT_CUSTOMREQUEST => 'POST',

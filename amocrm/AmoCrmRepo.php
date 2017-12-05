@@ -50,9 +50,9 @@ class AmoCrmRepo
         return $this->client->createTask($dealId, ApiClient::TASK_ELEMENT_TYPE_DEAL, array_shift($taskTypes)->id, $userId);
     }
 
-    public function linkDealToContact($contactId, $dealId)
+    public function linkDealToContact(array $contact, $dealId)
     {
-        return $this->client->setDealToContact($contactId, $dealId);
+        return $this->client->setDealToContact($contact, $dealId);
     }
 
     /**
@@ -60,9 +60,9 @@ class AmoCrmRepo
      *
      * @param $email
      * @param $phone
-     * @return array|null
+     * @return \stdClass|null
      */
-    public function findContact($email, $phone) : ?array
+    public function findContact($email, $phone) : ?\stdClass
     {
         //check if contact with given email exists
         $contacts = $this->client->getContacts($email);
@@ -75,7 +75,8 @@ class AmoCrmRepo
         if (!count($contacts)) {
             return null;
         } else {
-            return [$contacts[0]->id, $contacts[0]->responsible_user_id];
+//            return [$contacts[0]->id, $contacts[0]->responsible_user_id];
+            return $contacts[0];
         }
     }
 
@@ -89,11 +90,19 @@ class AmoCrmRepo
         return $this->currentAccountInfo = $this->client->currentAccount();
     }
 
-    /**
-     * @param array $fields
-     * @return object
-     */
-    public function createContact(array $fields) : \stdClass
+    public function updateContact($contactId, $fields, $contactInSystem)
+    {
+        $fields = array_merge((array)$contactInSystem, $fields);
+
+        $customFieldsAssoc = $this->getAccountCurrentFields();
+
+        $fields['responsible_user_id'] = $contactInSystem;
+        $fields['last_modified'] = time();
+
+        return $contact = $this->client->updateContact($contactId, $fields, $customFieldsAssoc);
+    }
+
+    protected function getAccountCurrentFields()
     {
         $currentAccountInfo = $this->currentAccountInfo ?? $this->accountInfo();
         $customFields = $currentAccountInfo->account->custom_fields->contacts;
@@ -102,6 +111,18 @@ class AmoCrmRepo
         foreach ($customFields as $customField) {
             $customFieldsAssoc[$customField->code] = $customField;
         }
+        return $customFieldsAssoc;
+    }
+
+    /**
+     * @param array $fields
+     * @return object
+     */
+    public function createContact(array $fields, $responsibleUserId) : \stdClass
+    {
+        $customFieldsAssoc = $this->getAccountCurrentFields();
+
+        $fields['responsible_user_id'] = $responsibleUserId;
 
         return $contact = $this->client->createContact($fields, $customFieldsAssoc);
     }
